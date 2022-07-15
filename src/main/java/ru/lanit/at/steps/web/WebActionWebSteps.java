@@ -24,12 +24,28 @@ public class WebActionWebSteps extends AbstractWebSteps {
 
 
     /**
+     * нажимает на элемент из выпадающего списка по тексту
+     *
+     * @param text текст выпадающего списка элемента
+     */
+    @Когда("кликнуть на элемент в поле {string} из выпадающего списка по тексту {string}")
+    public void clickOptionElementWithText(String elementName, String text) {
+        elementName = replaceVars(elementName, getStorage());
+        text = replaceVars(text, getStorage());
+        pageManager.getCurrentPage().getElement(elementName)
+                .shouldBe(Condition.visible)
+                .selectOptionContainingText(text);
+        LOGGER.info("клик на элемент в поле '{}' из выпадающего списка по тексту '{}'", elementName, text);
+    }
+
+    /**
      * нажимает на элемент по тексту
      *
      * @param text текст элемента
      */
     @Когда("кликнуть на элемент по тексту {string}")
     public void clickElementWithText(String text) {
+        text = replaceVars(text, getStorage());
         $(Selectors.byText(text))
                 .shouldBe(Condition.visible)
                 .click();
@@ -126,7 +142,7 @@ public class WebActionWebSteps extends AbstractWebSteps {
      * @param key   - значение
      */
     @Когда("сохранить значение из поля {string} под именем {string}")
-    public void saveTextField(String field, String key) {
+    public void saveValueField(String field, String key) {
         SelenideElement fieldElement = pageManager
                 .getCurrentPage()
                 .getElement(field);
@@ -137,6 +153,23 @@ public class WebActionWebSteps extends AbstractWebSteps {
         LOGGER.info("значение '{}' сохранено под именем '{}'", elementValue, key);
     }
 
+    /**
+     * Сохранить текст из элемента
+     *
+     * @param field - наименование элемента
+     * @param key   - значение
+     */
+    @Когда("сохранить текст из поля {string} под именем {string}")
+    public void saveTextField(String field, String key) {
+        SelenideElement fieldElement = pageManager
+                .getCurrentPage()
+                .getElement(field);
+        String elementText = fieldElement
+                .shouldBe(Condition.visible, Duration.ofSeconds(60))
+                .getText();
+        saveValueInStorage(key, elementText);
+        LOGGER.info("текст '{}' сохранен под именем '{}'", elementText, key);
+    }
 
     /**
      * Очистка поля

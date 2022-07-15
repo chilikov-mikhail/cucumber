@@ -1,6 +1,7 @@
 package ru.lanit.at.steps;
 
 
+import io.cucumber.java.ru.Если;
 import io.cucumber.java.ru.И;
 import io.cucumber.java.ru.Когда;
 import io.qameta.allure.Allure;
@@ -47,5 +48,9 @@ public class VariableSteps {
         });
     }
 
-
+    @Если("изменить значение переменной {word} на {word}")
+    public void changeValueOfVariable(String key, String value){
+        ContextHolder.asMap().put(key, value);
+        LOGGER.info("значение '{}' сохранено под именем '{}'", value, key);
+    }
 }

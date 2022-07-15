@@ -1,0 +1,7 @@
+{
+  "title": "${title}",
+  "status": "${status}",
+  "description": "${description}",
+  "priority": "${priority}",
+  "queue": "${queue}"
+}
