@@ -3,6 +3,8 @@
 
 В ходе написания автотестов доработаны некоторые методы фреймворка.
 
+Все внесенные мной изменения в проект - в коммите "cucumber".
+
 API тесты:
 - Создание тикета с высоким приоритетом - src/test/resources/features/api/Helpdesk/HelpdeskCreateTicket.feature
 - Негативная проверка: перевода статуса тикета из "Закрыт" в "Открыт" - src/test/resources/features/api/Helpdesk/HelpdeskUpdateTicket.feature
