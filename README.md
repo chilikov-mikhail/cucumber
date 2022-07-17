@@ -1,3 +1,18 @@
+## Cucumber + Selenide
+Используя фреймворк и Cucumber, автоматизированы тест-кейсы для проверки Helpdesk. 
+
+В ходе написания автотестов доработаны некоторые методы фреймворка.
+
+API тесты:
+- Создание тикета с высоким приоритетом - src/test/resources/features/api/Helpdesk/HelpdeskCreateTicket.feature
+- Негативная проверка: перевода статуса тикета из "Закрыт" в "Открыт" - src/test/resources/features/api/Helpdesk/HelpdeskUpdateTicket.feature
+
+UI тесты:
+- Редактирование созданного тикета (с прикреплением файла в созданный тикет) - src/test/resources/features/web/Helpdesk/HelpdeskEditTicket.feature
+- Сохранение поискового запроса - src/test/resources/features/web/Helpdesk/HelpdeskSavingSearchQuery.feature
+
+
+
 ## Шаблон Фреймворка  для запуска автотестов
 BDD фреймворк для автотестов на Java, использующий:
 - [Selenide](https://ru.selenide.org) для тестирования Web UI
