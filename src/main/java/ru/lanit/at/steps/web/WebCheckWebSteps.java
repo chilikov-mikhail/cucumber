@@ -8,6 +8,8 @@ import ru.lanit.at.utils.web.pagecontext.PageManager;
 
 import java.util.List;
 
+import static ru.lanit.at.utils.VariableUtil.replaceVars;
+
 public class WebCheckWebSteps extends AbstractWebSteps {
 
     public WebCheckWebSteps(PageManager pageManager) {
@@ -37,6 +39,7 @@ public class WebCheckWebSteps extends AbstractWebSteps {
      */
     @Когда("на странице присутствует текст {string}")
     public void textAppearOnThePage(String text) {
+        text = replaceVars(text, getStorage());
         WebChecks.textVisibleOnPage(text, null);
         LOGGER.info("на странице '{}' имеется текст '{}'", pageManager.getCurrentPage().name(), text);
     }
@@ -139,5 +142,19 @@ public class WebCheckWebSteps extends AbstractWebSteps {
     @Тогда("проверить что текущий url содержит текст {string}")
     public void currentUrlContainsExpected(String url) {
         WebChecks.urlContains(url);
+    }
+
+    /**
+     * проверка присутствия текста в элементе
+     *
+     * @param text текст
+     */
+    @Когда("элемент {string} содержит текст {string}")
+    public void textAppearOnThePage(String elementName, String text) {
+        text = replaceVars(text, getStorage());
+        SelenideElement element = pageManager.getCurrentPage().getElement(elementName);
+        WebChecks.elementContainsText(element, text);
+        LOGGER.info("на странице '{}' в элементе '{}' имеется текст '{}'",
+                pageManager.getCurrentPage().name(),elementName, text);
     }
 }
